@@ -1,13 +1,19 @@
 #!/bin/bash
 
+#This script creates a folder structure for a new data science project.
+#It asks for two inputs to the user: the project name and the type of license.
+
+#First it collects the project name and stores it in a variable. It will ask the user until a project name is selected or a force quit.
 while [[ -z "$project_name" ]]
 do
   read -p "Enter Your Project Name: "  project_name
 done
 
+#It creates the main folder with the project name, and then enters it for creating the rest of the folders
 mkdir $project_name
 cd $project_name
 
+#Start creating the rest of the folders according to the structure in the README.md file.
 mkdir "doc"
 mkdir "notebooks"
 
@@ -28,6 +34,8 @@ cd "src"
 mkdir "data"
 mkdir "models"
 cd ..
+
+#Now it creates the README.md file with the project with a suggested structure for explaining the project.
 
 echo "# $project_name
 Put some information about your data science project! I recommend you a structure:
@@ -54,6 +62,9 @@ There's a directory just for data sources, but it's important to have a summary 
 |  |  |  |  |
 |  |  |  |  |" > README.md
 
+# Now it creates the LICENSE.md file. It asks the user if he wants an MIT, BSD or empty license file.
+# The user must select the number. The script will ask the user until a valid answer is returned.
+# After receiving a valid answer, the script ends.
 PS3='Please select a license type for your project (just type the number): '
 options=("MIT" "BSD" "Empty")
 select opt in "${options[@]}"
